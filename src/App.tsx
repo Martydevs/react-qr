@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import download from "downloadjs";
+import { useState } from "react";
 
 import Header from "./components/ui/Header";
 import QrControls from "./components/ui/QrControls";
@@ -7,17 +6,13 @@ import QrViewer from "./components/ui/QrViewer";
 import { DownArrowIcon } from "./components/icons/Icons";
 import BorderedButton from "./components/ui/BorderedButton";
 import { QrColors } from "./models/qr-viewer";
+import useIsValidUrl from "./hooks/useIsValidUrl";
+import handleDownloadCode from "./lib/download";
 
 function App() {
   const [url, setUrl] = useState("");
-  const [isValidUrl, setIsValidUrl] = useState(false);
+  const isValidUrl = useIsValidUrl(url);
   const [qrColors, setQrColors] = useState<QrColors>({ bgColor: "#fff", foreColor: "#000" })
-
-  const handleDownloadCode = () => {
-    const qr = document.getElementById("qr-result") as HTMLImageElement;
-    const dataUrl = qr.src;
-    download(dataUrl, "qrcode.png", "image/png");
-  };
 
   const handleBackground = (hexColor: string) => {
     setQrColors({
@@ -32,11 +27,6 @@ function App() {
       foreColor: hexColor
     })
   }
-
-  useEffect(() => {
-    const validUrl = URL.canParse(url)
-    setIsValidUrl(validUrl);
-  }, [url]);
 
   return (
     <main className="min-h-screen w-full flex flex-col items-center justify-center bg-zinc-950">
@@ -65,7 +55,7 @@ function App() {
             dispatcher={setUrl} 
             bgColorDispatcher={handleBackground} 
             foreColorDispatcher={handleForeColor} 
-            fn={handleDownloadCode}
+            fn={() => handleDownloadCode("qr-result")}
             urlStatus={isValidUrl}
           />
         </section>
