@@ -7,15 +7,15 @@ import {
 } from "react";
 import { QRious } from "react-qrious";
 import throttle from "../../lib/throttle";
-import { QrColors } from "../../models/qr-viewer";
+import { QrProperties } from "../../models/qr-viewer";
 
 interface QrViewerProps extends ComponentPropsWithoutRef<"section"> {
   url: string;
   isValidUrl: boolean;
-  backgroundColor: QrColors;
+  qrAttributes: QrProperties;
 }
 
-function QrViewer({ url, isValidUrl, backgroundColor: { bgColor, foreColor }, ...props }: QrViewerProps) {
+function QrViewer({ url, isValidUrl, qrAttributes: { bgColor, foreColor, size }, ...props }: QrViewerProps) {
   return (
     <section {...props}>
       {url === "" ? (
@@ -24,7 +24,7 @@ function QrViewer({ url, isValidUrl, backgroundColor: { bgColor, foreColor }, ..
         <CardTilt>
           <QRious
             value={url} 
-            size={300} 
+            size={size} 
             background={bgColor} 
             foreground={foreColor}
             className="hover:scale-150 hover:animate-jump"
