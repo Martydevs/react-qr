@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef, Dispatch, FormEvent, SetStateAction, useState
 import { HexColorPicker } from "react-colorful";
 import { toast } from 'sonner';
 
-import { CheckIcon, ColorPaletteIcon, DownloadIcon, ShareIcon } from "../icons/Icons";
+import { CheckIcon, ColorPaletteIcon, DownloadIcon } from "../icons/Icons";
 
 import BorderedEntry from "./BorderedEntry";
 import Button from "./Button";
@@ -40,7 +40,7 @@ function QrControls({ dispatcher, fn, bgColorDispatcher, foreColorDispatcher, ur
         <BorderedEntry
           placeholder="Ingrese la url aqui.."
           type="text"
-          name="data-url"
+          id="data-url"
           onChange={(e) => setValue(e.target.value)}
         />
         <Button type="submit">
@@ -69,12 +69,6 @@ function QrControls({ dispatcher, fn, bgColorDispatcher, foreColorDispatcher, ur
                   <HexColorPicker id="secondary-picker" onChange={foreColorDispatcher} className="max-h-full" />
                 </label>
               </div>
-            </fieldset>
-            <fieldset className="border border-slate-800 rounded-md w-full flex flex-row justify-evenly items-center p-2">
-              <legend className="font-sans font-bold flex gap-2">
-                <ShareIcon size="1.5em" />
-                Compartir
-              </legend>
             </fieldset>
           </>
         )}
