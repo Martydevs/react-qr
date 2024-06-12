@@ -7,7 +7,7 @@ import {
 } from "react";
 import { QRious } from "react-qrious";
 import throttle from "../../lib/throttle";
-import { QrProperties } from "../../models/qr-viewer";
+import { QrProperties } from "../../types/qr-viewer";
 
 interface QrViewerProps extends ComponentPropsWithoutRef<"section"> {
   url: string;

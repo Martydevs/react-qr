@@ -5,7 +5,7 @@ type IconProps = {
   props?: SVGProps<SVGSVGElement>;
 };
 
-export function CheckIcon({ size, props }: IconProps) {
+export function CheckIcon({ size, ...props }: IconProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
