@@ -18,7 +18,7 @@ interface QrViewerProps extends ComponentPropsWithoutRef<"section"> {
 function QrViewer({ url, isValidUrl, qrAttributes: { bgColor, foreColor, size }, ...props }: QrViewerProps) {
   return (
     <section {...props}>
-      {url === "" ? (
+      { url === "" ? (
         <p className="text-2xl">Ingrese una URL</p>
       ) : isValidUrl ? (
         <CardTilt>
@@ -27,13 +27,12 @@ function QrViewer({ url, isValidUrl, qrAttributes: { bgColor, foreColor, size },
             size={size} 
             background={bgColor} 
             foreground={foreColor}
-            className="hover:scale-150 hover:animate-jump"
             id="qr-result" 
           />
         </CardTilt>
-      ) : (
-        <p className="text-2xl">url inválida</p>
-      )}
+      ) : !isValidUrl && url !== "" ? (
+        <p className="text-2xl">URL inválida</p>
+      ): null}
     </section>
   );
 }

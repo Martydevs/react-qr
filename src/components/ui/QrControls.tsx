@@ -1,9 +1,4 @@
-import {
-  ComponentPropsWithoutRef,
-  FormEvent,
-  useRef,
-  useState,
-} from "react";
+import { ComponentPropsWithoutRef, Dispatch, FormEvent, SetStateAction, useRef, useState } from "react";
 import { toast } from "sonner";
 
 import { CheckIcon, DownloadIcon } from "../icons/Icons";
@@ -13,7 +8,7 @@ import BorderedEntry from "./BorderedEntry";
 import Button from "./Button";
 
 interface QrControlsProps extends ComponentPropsWithoutRef<"section"> {
-  urlDispatcher: (value: string) => void;
+  urlDispatcher: Dispatch<SetStateAction<string>>;
   urlStatus: boolean;
 }
 
@@ -28,12 +23,19 @@ function QrControls({
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const isValidUrl = URL.canParse(value);
+    
+    if (value.length === 0) {
+      toast.warning("Por favor ingrese una url");
+    } else {
+      const isUrlValid = URL.canParse(value);
 
-    if (isValidUrl) {
-      toast.success("QR Generado exitosamente!");
-      urlDispatcher(value);
-      formRef.current?.reset();
+      if (isUrlValid) {
+        urlDispatcher(value);
+        toast.success("QR generado exitosamente");
+        formRef.current?.reset();
+      } else {
+        toast.error("URL inválida, intente de nuevo");
+      }
     }
   };
 
@@ -43,7 +45,7 @@ function QrControls({
         id="qr-form"
         onSubmit={handleSubmit}
         autoComplete={"off"}
-        className="flex flex-col items-center justify-center gap-3 h-full mx-1 w-full"
+        className="flex flex-col items-center justify-center gap-3 h-full w-full"
         ref={formRef}
       >
         <BorderedEntry
@@ -61,7 +63,7 @@ function QrControls({
           <p>Descargar</p>
         </Button>
 
-        { urlStatus && children }
+        {urlStatus && children}
       </form>
     </section>
   );

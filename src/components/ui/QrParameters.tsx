@@ -19,12 +19,12 @@ function QrParameters({
   }
 
   return (
-    <fieldset className="border border-slate-800 rounded-md w-full flex flex-col sm:flex-col p-4">
+    <fieldset className="border border-slate-800 rounded-md w-full flex flex-col-reverse sm:flex-col md:flex-col lg:flex-col p-4">
       <legend className="font-sans font-bold flex gap-2">
         <ColorPaletteIcon size="1.5em" />
         Personalizar código
       </legend>
-      <div className="w-full flex items-center justify-evenly">
+      <div className="w-full flex flex-col items-center justify-evenly md:flex-row lg:flex-row">
         <label className="font-mono font-bold" htmlFor="primary-picker">
           Color Primario
           <ColorPicker
@@ -42,9 +42,9 @@ function QrParameters({
           />
         </label>
       </div>
-      <div className="w-full mb-2 flex flex-col items-center py-2">
+      <div className="w-full mb-2 flex flex-col items-center justify-center py-2">
         <h5 className="font-mono font-bold">Tamaño</h5>
-        <section className="min-w-full flex items-center justify-evenly py-2">
+        <section className="w-full flex flex-col items-center justify-evenly py-2 gap-2 md:flex-row lg:flex-row">
           <RadioButton
             formId="qr-form"
             id="radio-small"

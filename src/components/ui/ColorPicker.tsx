@@ -12,7 +12,7 @@ const ColorPicker = ({ dispatcher, pickerId, inputId }: ColorPickerProps) => {
       <HexColorPicker
         id={inputId}
         onChange={dispatcher}
-        className="h-full sm:scale-95"
+        className="h-full w-full"
       />
       <HexColorInput className="bg-slate-900 border border-slate-800 min-w-full py-2 rounded-lg sm:scale-95" placeholder="Color hexadecimal..." id={pickerId} onChange={dispatcher} />
     </div>
