@@ -4,7 +4,7 @@ interface RadioButtonProps extends ComponentPropsWithoutRef<"input"> {
   label: string
   id: string
   formId: string
-};
+}
 
 const RadioButton = ({
   id,

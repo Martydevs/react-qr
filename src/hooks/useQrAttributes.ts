@@ -9,32 +9,28 @@ interface QrHandlers {
 }
 
 export default function useQrAttributes({ bgColor, foreColor, size }: QrProperties): QrHandlers {
-  const [attributes, setQrAttributes] = useState<QrProperties>({
+  const [qrAttributes, setQrAttributes] = useState<QrProperties>({
     bgColor,
     foreColor,
     size,
   });
 
-  const handleBackground = (hexColor: string) => {
-    setQrAttributes({
-      ...attributes,
-      bgColor: hexColor,
-    });
+  const handleBackgroundColorChange = (newColor: string) => {
+    setQrAttributes({ ...qrAttributes, bgColor: newColor });
   };
 
-  const handleForeColor = (hexColor: string) => {
-    setQrAttributes({
-      ...attributes,
-      foreColor: hexColor,
-    });
+  const handleForegroundColorChange = (newColor: string) => {
+    setQrAttributes({ ...qrAttributes, foreColor: newColor });
   };
 
-  const handleSize = (value: number) => {
-    setQrAttributes({
-      ...attributes,
-      size: value,
-    });
-  }
+  const handleSizeChange = (newSize: number) => {
+    setQrAttributes({ ...qrAttributes, size: newSize });
+  };
 
-  return { handleBackground, handleForeColor, handleSize, attributes }
+  return {
+    handleBackground: handleBackgroundColorChange,
+    handleForeColor: handleForegroundColorChange,
+    handleSize: handleSizeChange,
+    attributes: qrAttributes,
+  };
 }
